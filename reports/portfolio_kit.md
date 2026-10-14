@@ -40,7 +40,7 @@ All numbers come from the analysis outputs.
 > One important caveat: this dataset is **catalog metadata**, not viewing data. It shows what Netflix *offers*,
 > not what people *watch*. Keeping that line clear was one of my main goals.
 >
-> 🔗 GitHub: [link]
+> 🔗 GitHub: https://github.com/Prijesh77/netflix-content-analytics
 > Feedback welcome, especially from analysts working in media and streaming!
 >
 > #DataAnalytics #Python #SQL #PowerBI #DataVisualization #Portfolio #OpenToWork
