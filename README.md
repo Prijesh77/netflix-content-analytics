@@ -106,7 +106,8 @@ data/raw/netflix_titles.csv              (never modified)
 | ![](powerbi/dashboard_screenshots/01_executive_overview.png) | ![](powerbi/dashboard_screenshots/02_content_trends.png) | ![](powerbi/dashboard_screenshots/03_global_content_genres.png) |
 
 Open [`powerbi/netflix_dashboard.pbip`](powerbi/netflix_dashboard.pbip) in Power BI Desktop. The model, its 28 DAX measures and all 3 pages are stored as text (TMDL + PBIR), so every change is reviewable in Git.
-The walkthrough of the data model and measures is in [`powerbi/DASHBOARD_BUILD_GUIDE.md`](powerbi/DASHBOARD_BUILD_GUIDE.md).
+
+**Data model:** a star schema with `titles` at the centre, bridge tables for countries and genres (one row per title–country and title–genre, with bidirectional filtering only on the bridge-to-titles relationships), plus `Dim Country`, `Dim Genre` and a marked `Dim Date` table. The measures live in `_Measures`, grouped into folders: KPIs, Time, Duration, Context and Visual helpers.
 
 ## 💡 Key findings
 
@@ -174,8 +175,6 @@ netflix-content-analytics/
 │   ├── netflix_dashboard.pbip          # open this in Power BI Desktop
 │   ├── netflix_dashboard.Report/       # report pages & visuals (PBIR)
 │   ├── netflix_dashboard.SemanticModel/ # tables, relationships, DAX (TMDL)
-│   ├── netflix_theme.json
-│   ├── DASHBOARD_BUILD_GUIDE.md
 │   └── dashboard_screenshots/
 ├── reports/
 │   ├── key_findings.md

@@ -102,7 +102,7 @@ All numbers come from the analysis outputs.
 > It also means shares add up to more than 100% because of co-productions, and I explain that on the charts."
 
 **Bonus questions to prepare:**
-- *"What's the difference between a measure and a calculated column?"* (See `powerbi/DASHBOARD_BUILD_GUIDE.md`, Step 4.)
+- *"What's the difference between a measure and a calculated column?"* A calculated column is computed once per row at refresh, is stored, and can go on an axis or slicer (e.g. `Runtime Band`). A measure is computed at query time in the current filter context and reacts to slicers (e.g. `Total Titles`).
 - *"Why the median movie duration rather than the mean?"* Because of outliers from 3 to 312 minutes.
 - *"What would you analyse with more data?"* Viewing hours by genre, subscriber churn vs new releases, and
   historical snapshots. (See the follow-up table in `key_findings.md`.)
