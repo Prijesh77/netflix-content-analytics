@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "p3_rating_slicer",
   "position": {
     "x": 16,
     "y": 378,
     "z": 5000,
-    "width": 220,
     "height": 70,
+    "width": 220,
     "tabOrder": 5000
   },
   "visual": {
@@ -28,6 +28,7 @@
               },
               "queryRef": "titles.rating",
               "nativeQueryRef": "rating",
+              "active": true,
               "displayName": "Rating"
             }
           ]

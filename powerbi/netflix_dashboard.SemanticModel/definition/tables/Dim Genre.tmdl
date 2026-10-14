@@ -18,3 +18,4 @@ table 'Dim Genre'
 				    DistinctValues
 
 	annotation PBI_ResultType = Table
+

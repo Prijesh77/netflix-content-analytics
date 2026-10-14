@@ -137,9 +137,9 @@ table titles
 			    )
 			)
 		dataType: int64
+		isHidden
 		lineageTag: 8a85e265-30c1-5428-9913-c84073b303cb
 		summarizeBy: none
-		isHidden
 
 	column 'Runtime Band' =
 			IF (
@@ -167,8 +167,7 @@ table titles
 		lineageTag: a17e4716-e563-500c-8dbf-b7a8d0be81ee
 		summarizeBy: none
 
-	column 'Release Decade' =
-			FLOOR ( titles[release_year], 10 ) & "s"
+	column 'Release Decade' = FLOOR ( titles[release_year], 10 ) & "s"
 		dataType: string
 		lineageTag: 5ec8126a-cfc3-5b96-8e7b-631f4b3ccfae
 		summarizeBy: none
@@ -186,3 +185,4 @@ table titles
 				    ChangedTypes
 
 	annotation PBI_ResultType = Table
+

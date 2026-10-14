@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "p1_additions_column",
   "position": {
     "x": 428,
     "y": 214,
     "z": 8000,
-    "width": 836,
     "height": 456,
+    "width": 836,
     "tabOrder": 8000
   },
   "visual": {
@@ -27,25 +27,8 @@
                 }
               },
               "queryRef": "Dim Date.Year",
-              "nativeQueryRef": "Year"
-            }
-          ]
-        },
-        "Y": {
-          "projections": [
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Measures"
-                    }
-                  },
-                  "Property": "Titles Added"
-                }
-              },
-              "queryRef": "_Measures.Titles Added",
-              "nativeQueryRef": "Titles Added"
+              "nativeQueryRef": "Year",
+              "active": true
             }
           ]
         },
@@ -66,6 +49,24 @@
               "nativeQueryRef": "type"
             }
           ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Titles Added"
+                }
+              },
+              "queryRef": "_Measures.Titles Added",
+              "nativeQueryRef": "Titles Added"
+            }
+          ]
         }
       },
       "sortDefinition": {
@@ -83,8 +84,7 @@
             },
             "direction": "Ascending"
           }
-        ],
-        "isDefaultSort": false
+        ]
       }
     },
     "objects": {

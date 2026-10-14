@@ -18,3 +18,4 @@ table 'Dim Country'
 				    DistinctValues
 
 	annotation PBI_ResultType = Table
+

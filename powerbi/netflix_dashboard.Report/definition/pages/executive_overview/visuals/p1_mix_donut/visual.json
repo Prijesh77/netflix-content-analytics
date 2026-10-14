@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "p1_mix_donut",
   "position": {
     "x": 16,
     "y": 214,
     "z": 7000,
-    "width": 400,
     "height": 456,
+    "width": 400,
     "tabOrder": 7000
   },
   "visual": {
@@ -27,7 +27,8 @@
                 }
               },
               "queryRef": "titles.type",
-              "nativeQueryRef": "type"
+              "nativeQueryRef": "type",
+              "active": true
             }
           ]
         },

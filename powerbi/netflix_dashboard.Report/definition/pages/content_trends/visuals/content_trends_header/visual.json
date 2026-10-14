@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "content_trends_header",
   "position": {
-    "x": 16,
-    "y": 8,
+    "x": 461.03343465045594,
+    "y": 3.8905775075987843,
     "z": 0,
-    "width": 700,
-    "height": 44,
+    "height": 61.276595744680854,
+    "width": 700.30395136778122,
     "tabOrder": 0
   },
   "visual": {
@@ -21,13 +21,12 @@
                   {
                     "value": "NETFLIX CONTENT ANALYTICS",
                     "textStyle": {
+                      "fontWeight": "bold",
                       "fontSize": "18pt",
-                      "color": "#FFFFFF",
-                      "fontWeight": "bold"
+                      "color": "#ffffff"
                     }
                   }
-                ],
-                "horizontalTextAlignment": "left"
+                ]
               }
             ]
           }

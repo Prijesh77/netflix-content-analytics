@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "p3_year_slicer",
   "position": {
     "x": 16,
     "y": 174,
     "z": 3000,
-    "width": 220,
     "height": 110,
+    "width": 220,
     "tabOrder": 3000
   },
   "visual": {
@@ -28,6 +28,7 @@
               },
               "queryRef": "titles.release_year",
               "nativeQueryRef": "release_year",
+              "active": true,
               "displayName": "Release year"
             }
           ]

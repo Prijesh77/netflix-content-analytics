@@ -213,10 +213,10 @@ table _Measures
 
 	column Placeholder
 		dataType: string
+		isHidden
 		lineageTag: 8a567e4c-dd48-5661-b812-31d1dabdb801
 		summarizeBy: none
 		sourceColumn: Placeholder
-		isHidden
 
 	partition _Measures = m
 		mode: import
@@ -227,3 +227,4 @@ table _Measures
 				    Source
 
 	annotation PBI_ResultType = Table
+

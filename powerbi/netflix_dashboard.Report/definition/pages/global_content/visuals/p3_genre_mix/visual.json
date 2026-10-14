@@ -1,36 +1,18 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "p3_genre_mix",
   "position": {
     "x": 248,
     "y": 420,
     "z": 10000,
-    "width": 1016,
     "height": 252,
+    "width": 1016,
     "tabOrder": 10000
   },
   "visual": {
     "visualType": "pivotTable",
     "query": {
       "queryState": {
-        "Rows": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Dim Country"
-                    }
-                  },
-                  "Property": "country"
-                }
-              },
-              "queryRef": "Dim Country.country",
-              "nativeQueryRef": "country"
-            }
-          ]
-        },
         "Columns": {
           "projections": [
             {
@@ -45,7 +27,27 @@
                 }
               },
               "queryRef": "Dim Genre.genre_group",
-              "nativeQueryRef": "genre_group"
+              "nativeQueryRef": "genre_group",
+              "active": true
+            }
+          ]
+        },
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim Country"
+                    }
+                  },
+                  "Property": "country"
+                }
+              },
+              "queryRef": "Dim Country.country",
+              "nativeQueryRef": "country",
+              "active": true
             }
           ]
         },

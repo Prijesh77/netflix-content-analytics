@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "content_trends_subheader",
   "position": {
-    "x": 16,
-    "y": 46,
+    "x": 15.562310030395137,
+    "y": 45.714285714285715,
     "z": 1000,
-    "width": 700,
-    "height": 38,
+    "height": 37.933130699088146,
+    "width": 423.10030395136778,
     "tabOrder": 1000
   },
   "visual": {
@@ -22,11 +22,10 @@
                     "value": "Content Trends",
                     "textStyle": {
                       "fontSize": "11pt",
-                      "color": "#B3B3B3"
+                      "color": "#b3b3b3"
                     }
                   }
-                ],
-                "horizontalTextAlignment": "left"
+                ]
               }
             ]
           }

@@ -10,6 +10,8 @@ annotation __PBI_TimeIntelligenceEnabled = 0
 
 annotation PBI_QueryOrder = ["DataFolder", "titles", "title_countries", "title_genres", "Dim Country", "Dim Genre", "Dim Date", "_Measures"]
 
+annotation PBI_ProTooling = ["DevMode"]
+
 ref table titles
 ref table title_countries
 ref table title_genres
@@ -17,3 +19,6 @@ ref table 'Dim Country'
 ref table 'Dim Genre'
 ref table 'Dim Date'
 ref table _Measures
+
+ref cultureInfo en-US
+

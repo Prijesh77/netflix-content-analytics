@@ -1,14 +1,14 @@
 table 'Dim Date'
-	dataCategory: Time
 	lineageTag: 7db0f96d-4dcf-5f3a-abf6-7cc97b0025ac
+	dataCategory: Time
 
 	column Date
 		dataType: dateTime
+		isKey
 		formatString: yyyy-mm-dd
 		lineageTag: cc578499-6c87-5f1c-bfbe-fe1514d8be25
 		summarizeBy: none
 		sourceColumn: Date
-		isKey
 
 		annotation UnderlyingDateTimeDataType = Date
 
@@ -54,3 +54,4 @@ table 'Dim Date'
 				    AddYearMonth
 
 	annotation PBI_ResultType = Table
+

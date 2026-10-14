@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "global_content_type_slicer",
   "position": {
     "x": 16,
     "y": 92,
     "z": 2000,
-    "width": 220,
     "height": 70,
+    "width": 220,
     "tabOrder": 2000
   },
   "visual": {
@@ -28,6 +28,7 @@
               },
               "queryRef": "titles.type",
               "nativeQueryRef": "type",
+              "active": true,
               "displayName": "Content type"
             }
           ]
@@ -69,11 +70,6 @@
         }
       ]
     },
-    "syncGroup": {
-      "groupName": "content_type",
-      "fieldChanges": true,
-      "filterChanges": true
-    },
     "visualContainerObjects": {
       "title": [
         {
@@ -88,6 +84,11 @@
           }
         }
       ]
+    },
+    "syncGroup": {
+      "groupName": "content_type",
+      "fieldChanges": true,
+      "filterChanges": true
     }
   }
 }

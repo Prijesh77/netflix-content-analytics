@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "content_trends_type_slicer",
   "position": {
-    "x": 1000,
-    "y": 16,
+    "x": 1008.6322188449849,
+    "y": 0,
     "z": 2000,
-    "width": 264,
-    "height": 64,
+    "height": 83.647416413373861,
+    "width": 263.58662613981767,
     "tabOrder": 2000
   },
   "visual": {
@@ -28,6 +28,7 @@
               },
               "queryRef": "titles.type",
               "nativeQueryRef": "type",
+              "active": true,
               "displayName": "Content type"
             }
           ]
@@ -69,11 +70,6 @@
         }
       ]
     },
-    "syncGroup": {
-      "groupName": "content_type",
-      "fieldChanges": true,
-      "filterChanges": true
-    },
     "visualContainerObjects": {
       "title": [
         {
@@ -88,6 +84,29 @@
           }
         }
       ]
+    },
+    "syncGroup": {
+      "groupName": "content_type",
+      "fieldChanges": true,
+      "filterChanges": true
     }
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "1bb2121cf0ee326f9d58",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "titles"
+              }
+            },
+            "Property": "type"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
   }
 }

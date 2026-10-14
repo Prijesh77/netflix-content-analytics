@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "p3_top_countries",
   "position": {
     "x": 248,
     "y": 92,
     "z": 8000,
-    "width": 502,
     "height": 316,
+    "width": 502,
     "tabOrder": 8000
   },
   "visual": {
@@ -27,25 +27,8 @@
                 }
               },
               "queryRef": "Dim Country.country",
-              "nativeQueryRef": "country"
-            }
-          ]
-        },
-        "Y": {
-          "projections": [
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Measures"
-                    }
-                  },
-                  "Property": "Titles (Top 10 Countries)"
-                }
-              },
-              "queryRef": "_Measures.Titles (Top 10 Countries)",
-              "nativeQueryRef": "Titles (Top 10 Countries)"
+              "nativeQueryRef": "country",
+              "active": true
             }
           ]
         },
@@ -66,6 +49,24 @@
               "nativeQueryRef": "type"
             }
           ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Titles (Top 10 Countries)"
+                }
+              },
+              "queryRef": "_Measures.Titles (Top 10 Countries)",
+              "nativeQueryRef": "Titles (Top 10 Countries)"
+            }
+          ]
         }
       },
       "sortDefinition": {
@@ -83,8 +84,7 @@
             },
             "direction": "Descending"
           }
-        ],
-        "isDefaultSort": false
+        ]
       }
     },
     "objects": {
