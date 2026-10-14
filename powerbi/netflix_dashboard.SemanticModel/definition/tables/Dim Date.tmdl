@@ -1,0 +1,56 @@
+table 'Dim Date'
+	dataCategory: Time
+	lineageTag: 7db0f96d-4dcf-5f3a-abf6-7cc97b0025ac
+
+	column Date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: cc578499-6c87-5f1c-bfbe-fe1514d8be25
+		summarizeBy: none
+		sourceColumn: Date
+		isKey
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Year
+		dataType: int64
+		lineageTag: 174fe1c4-7dfe-55d3-9294-3f40179a2b3a
+		summarizeBy: none
+		sourceColumn: Year
+
+	column 'Month Num'
+		dataType: int64
+		lineageTag: 21d50185-b1ad-5a8f-b73c-a14578ba042a
+		summarizeBy: none
+		sourceColumn: Month Num
+
+	column Month
+		dataType: string
+		lineageTag: 0b225d66-e4ee-5fc0-ac90-ca16948da300
+		summarizeBy: none
+		sourceColumn: Month
+		sortByColumn: 'Month Num'
+
+	column 'Year Month'
+		dataType: string
+		lineageTag: b9fa9fc1-222d-5ab2-b50e-f15077be05b8
+		summarizeBy: none
+		sourceColumn: Year Month
+
+	partition 'Dim Date' = m
+		mode: import
+		source =
+				let
+				    StartDate = #date(2008, 1, 1),
+				    EndDate = #date(2021, 12, 31),
+				    DateList = List.Dates(StartDate, Duration.Days(EndDate - StartDate) + 1, #duration(1, 0, 0, 0)),
+				    DateTable = Table.FromList(DateList, Splitter.SplitByNothing(), {"Date"}),
+				    TypedDate = Table.TransformColumnTypes(DateTable, {{"Date", type date}}),
+				    AddYear = Table.AddColumn(TypedDate, "Year", each Date.Year([Date]), Int64.Type),
+				    AddMonthNum = Table.AddColumn(AddYear, "Month Num", each Date.Month([Date]), Int64.Type),
+				    AddMonth = Table.AddColumn(AddMonthNum, "Month", each Date.ToText([Date], [Format = "MMM", Culture = "en-US"]), type text),
+				    AddYearMonth = Table.AddColumn(AddMonth, "Year Month", each Date.ToText([Date], [Format = "yyyy-MM", Culture = "en-US"]), type text)
+				in
+				    AddYearMonth
+
+	annotation PBI_ResultType = Table

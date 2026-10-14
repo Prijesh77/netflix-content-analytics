@@ -1,0 +1,197 @@
+ total_entries | distinct_show_ids | distinct_titles_exact | distinct_titles_case_insensitive | distinct_release_years 
+---------------+-------------------+-----------------------+----------------------------------+------------------------
+          8806 |              8806 |                  8806 |                             8801 |                     74
+(1 row)
+
+  type   | titles | pct_of_catalog 
+---------+--------+----------------
+ Movie   |   6130 |           69.6
+ TV Show |   2676 |           30.4
+(2 rows)
+
+ added_year | titles_added | movies_added | tv_shows_added |          note          
+------------+--------------+--------------+----------------+------------------------
+       2008 |            2 |            1 |              1 | 
+       2009 |            2 |            2 |              0 | 
+       2010 |            1 |            1 |              0 | 
+       2011 |           13 |           13 |              0 | 
+       2012 |            3 |            3 |              0 | 
+       2013 |           11 |            6 |              5 | 
+       2014 |           24 |           19 |              5 | 
+       2015 |           82 |           56 |             26 | 
+       2016 |          429 |          253 |            176 | 
+       2017 |         1188 |          839 |            349 | 
+       2018 |         1649 |         1237 |            412 | 
+       2019 |         2015 |         1423 |            592 | 
+       2020 |         1879 |         1284 |            595 | 
+       2021 |         1498 |          993 |            505 | partial year (Jan–Sep)
+(14 rows)
+
+ added_year | titles_added | prev_year_added | yoy_change | yoy_change_pct 
+------------+--------------+-----------------+------------+----------------
+       2015 |           82 |                 |            |               
+       2016 |          429 |              82 |        347 |          423.2
+       2017 |         1188 |             429 |        759 |          176.9
+       2018 |         1649 |            1188 |        461 |           38.8
+       2019 |         2015 |            1649 |        366 |           22.2
+       2020 |         1879 |            2015 |       -136 |           -6.7
+       2021 |         1498 |            1879 |       -381 |          -20.3
+(7 rows)
+
+ added_year | titles_added_same_period 
+------------+--------------------------
+       2017 |                      859
+       2018 |                     1119
+       2019 |                     1353
+       2020 |                     1389
+       2021 |                     1498
+(5 rows)
+
+ country_rank |    country     | titles | movies | tv_shows | tv_share_pct | pct_of_all_titles 
+--------------+----------------+--------+--------+----------+--------------+-------------------
+            1 | United States  |   3690 |   2752 |      938 |         25.4 |              41.9
+            2 | India          |   1046 |    962 |       84 |          8.0 |              11.9
+            3 | United Kingdom |    806 |    534 |      272 |         33.7 |               9.2
+            4 | Canada         |    445 |    319 |      126 |         28.3 |               5.1
+            5 | France         |    393 |    303 |       90 |         22.9 |               4.5
+            6 | Japan          |    318 |    119 |      199 |         62.6 |               3.6
+            7 | Spain          |    232 |    171 |       61 |         26.3 |               2.6
+            8 | South Korea    |    231 |     61 |      170 |         73.6 |               2.6
+            9 | Germany        |    226 |    182 |       44 |         19.5 |               2.6
+           10 | Mexico         |    169 |    111 |       58 |         34.3 |               1.9
+(10 rows)
+
+          genre           | titles 
+--------------------------+--------
+ International Movies     |   2751
+ Dramas                   |   2426
+ Comedies                 |   1674
+ International TV Shows   |   1351
+ Documentaries            |    869
+ Action & Adventure       |    859
+ TV Dramas                |    763
+ Independent Movies       |    756
+ Children & Family Movies |    641
+ Romantic Movies          |    616
+(10 rows)
+
+    genre_group     | titles | pct_of_catalog 
+--------------------+--------+----------------
+ Drama              |   3189 |           36.2
+ Comedy             |   2255 |           25.6
+ Documentary        |   1268 |           14.4
+ Kids & Family      |   1092 |           12.4
+ Action & Adventure |   1027 |           11.7
+ Romance            |    986 |           11.2
+ Independent        |    756 |            8.6
+ Thriller & Mystery |    723 |            8.2
+ Crime              |    470 |            5.3
+ Horror             |    432 |            4.9
+(10 rows)
+
+    country     | genre_rank |  genre_group  | titles 
+----------------+------------+---------------+--------
+ Canada         |          1 | Kids & Family |    141
+ Canada         |          2 | Comedy        |    124
+ Canada         |          3 | Drama         |    114
+ France         |          1 | Drama         |    194
+ France         |          2 | Comedy        |     75
+ France         |          3 | Independent   |     73
+ India          |          1 | Drama         |    690
+ India          |          2 | Comedy        |    349
+ India          |          3 | Independent   |    167
+ United Kingdom |          1 | Drama         |    233
+ United Kingdom |          2 | Documentary   |    217
+ United Kingdom |          3 | Comedy        |    135
+ United States  |          1 | Drama         |   1067
+ United States  |          2 | Comedy        |    938
+ United States  |          3 | Documentary   |    707
+(15 rows)
+
+ audience_group |  rating  | titles | pct_of_catalog 
+----------------+----------+--------+----------------
+ Adults         | TV-MA    |   3206 |           36.4
+ Teens          | TV-14    |   2160 |           24.5
+ Family         | TV-PG    |    863 |            9.8
+ Adults         | R        |    799 |            9.1
+ Teens          | PG-13    |    490 |            5.6
+ Kids           | TV-Y7    |    334 |            3.8
+ Kids           | TV-Y     |    307 |            3.5
+ Family         | PG       |    287 |            3.3
+ Family         | TV-G     |    220 |            2.5
+ Not Rated      | NR       |     80 |            0.9
+ Family         | G        |     41 |            0.5
+ Not Rated      | Unknown  |      7 |            0.1
+ Kids           | TV-Y7-FV |      6 |            0.1
+ Adults         | NC-17    |      3 |            0.0
+ Not Rated      | UR       |      3 |            0.0
+(15 rows)
+
+ movies | avg_minutes | p25_minutes | median_minutes | p75_minutes | min_minutes | max_minutes | pct_60_to_120_min 
+--------+-------------+-------------+----------------+-------------+-------------+-------------+-------------------
+   6130 |        99.6 |          87 |             98 |         114 |           3 |         312 |              73.9
+(1 row)
+
+  runtime_band   | movies | pct_of_movies 
+-----------------+--------+---------------
+ 1. Under 60 min |    458 |           7.5
+ 2. 60–90 min    |   1535 |          25.0
+ 3. 91–120 min   |   2995 |          48.9
+ 4. 121–150 min  |    897 |          14.6
+ 5. Over 150 min |    245 |           4.0
+(5 rows)
+
+ seasons | tv_shows | pct_of_tv_shows | cumulative_pct 
+---------+----------+-----------------+----------------
+ 1       |     1793 |            67.0 |           67.0
+ 2       |      425 |            15.9 |           82.9
+ 3       |      199 |             7.4 |           90.3
+ 4       |       95 |             3.6 |           93.9
+ 5       |       65 |             2.4 |           96.3
+ 6+      |       99 |             3.7 |          100.0
+(6 rows)
+
+  type   | median_years_old_when_added | avg_years_old_when_added | pct_added_within_1_year | pct_10plus_years_old 
+---------+-----------------------------+--------------------------+-------------------------+----------------------
+ Movie   |                           2 |                      5.7 |                    49.6 |                 19.4
+ TV Show |                           0 |                      2.3 |                    67.4 |                  5.6
+(2 rows)
+
+ added_year | titles_added | tv_share_pct | tv_share_3yr_avg 
+------------+--------------+--------------+------------------
+       2016 |          429 |         41.0 |             41.0
+       2017 |         1188 |         29.4 |             35.2
+       2018 |         1649 |         25.0 |             31.8
+       2019 |         2015 |         29.4 |             27.9
+       2020 |         1879 |         31.7 |             28.7
+       2021 |         1498 |         33.7 |             31.6
+(6 rows)
+
+ added_year | busiest_month | titles_added 
+------------+---------------+--------------
+       2016 | Dec           |           96
+       2017 | Oct           |          126
+       2018 | Oct           |          191
+       2019 | Nov           |          255
+       2020 | Jan           |          205
+       2021 | Jul           |          257
+(6 rows)
+
+    country     | titles | tv_share_pct 
+----------------+--------+--------------
+ South Korea    |    231 |         73.6
+ Japan          |    318 |         62.6
+ Australia      |    160 |         41.3
+ Mexico         |    169 |         34.3
+ United Kingdom |    806 |         33.7
+(5 rows)
+
+     normalised_title     | entries |                               details                                
+--------------------------+---------+----------------------------------------------------------------------
+ death note               |       2 | s5319 (Movie, added 2017-08-25); s5752 (TV Show, added 2016-10-15)
+ esperando la carroza     |       2 | s304 (Movie, added 2021-08-05); s6706 (Movie, added 2018-07-15)
+ fullmetal alchemist      |       2 | s5034 (Movie, added 2018-02-19); s5096 (TV Show, added 2018-01-01)
+ love in a puff           |       2 | s160 (Movie, added 2021-09-01); s7346 (Movie, added 2018-08-01)
+ sin senos sí hay paraíso |       2 | s1271 (TV Show, added 2021-02-25); s8023 (TV Show, added 2019-01-11)
+(5 rows)
+

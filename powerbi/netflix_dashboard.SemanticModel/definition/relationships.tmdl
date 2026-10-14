@@ -1,0 +1,22 @@
+relationship 5da7dca9-b5c0-517c-a065-5627bf6d05cb
+	fromColumn: titles.date_added
+	toColumn: 'Dim Date'.Date
+
+relationship 3c84cd11-681f-5dfa-bd88-9693db22cbb9
+	crossFilteringBehavior: bothDirections
+	fromColumn: title_countries.show_id
+	toColumn: titles.show_id
+
+relationship 110f75a6-faf8-54cc-beba-efca27db7b7f
+	fromColumn: title_countries.country
+	toColumn: 'Dim Country'.country
+
+relationship a04ac950-fb8c-5e50-b63a-58b6b728d3e1
+	crossFilteringBehavior: bothDirections
+	fromColumn: title_genres.show_id
+	toColumn: titles.show_id
+
+relationship 8412b294-34d9-5650-9d2d-7a91bdcb0e02
+	fromColumn: title_genres.genre_group
+	toColumn: 'Dim Genre'.genre_group
+

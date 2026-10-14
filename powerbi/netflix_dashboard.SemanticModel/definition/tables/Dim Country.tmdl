@@ -1,0 +1,20 @@
+table 'Dim Country'
+	lineageTag: 780e0311-4aba-5322-b93c-02b9051e08ab
+
+	column country
+		dataType: string
+		lineageTag: daa1e244-ea75-5235-9510-993c9ff170cd
+		summarizeBy: none
+		sourceColumn: country
+
+	partition 'Dim Country' = m
+		mode: import
+		source =
+				let
+				    Source = title_countries,
+				    SelectedColumn = Table.SelectColumns(Source, {"country"}),
+				    DistinctValues = Table.Distinct(SelectedColumn)
+				in
+				    DistinctValues
+
+	annotation PBI_ResultType = Table

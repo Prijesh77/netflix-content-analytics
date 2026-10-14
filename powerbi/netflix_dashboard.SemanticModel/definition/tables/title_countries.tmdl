@@ -1,0 +1,26 @@
+table title_countries
+	lineageTag: 305518c8-83fa-5403-9e1d-158cf9073af6
+
+	column show_id
+		dataType: string
+		lineageTag: 6ba93aa0-70bf-5a42-abf5-746da6e877a7
+		summarizeBy: none
+		sourceColumn: show_id
+
+	column country
+		dataType: string
+		lineageTag: 43f083a0-4f57-521f-b170-daf6200ca081
+		summarizeBy: none
+		sourceColumn: country
+
+	partition title_countries = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "netflix_title_countries.csv"), [Delimiter = ",", Columns = 2, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    PromotedHeaders = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    ChangedTypes = Table.TransformColumnTypes(PromotedHeaders, {{"show_id", type text}, {"country", type text}})
+				in
+				    ChangedTypes
+
+	annotation PBI_ResultType = Table

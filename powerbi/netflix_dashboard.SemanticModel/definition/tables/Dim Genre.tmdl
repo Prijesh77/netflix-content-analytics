@@ -1,0 +1,20 @@
+table 'Dim Genre'
+	lineageTag: ab7c8fe4-da7f-5664-89ec-abf877785dd2
+
+	column genre_group
+		dataType: string
+		lineageTag: a3594139-0fe8-561e-a5ac-37cf07641b76
+		summarizeBy: none
+		sourceColumn: genre_group
+
+	partition 'Dim Genre' = m
+		mode: import
+		source =
+				let
+				    Source = title_genres,
+				    SelectedColumn = Table.SelectColumns(Source, {"genre_group"}),
+				    DistinctValues = Table.Distinct(SelectedColumn)
+				in
+				    DistinctValues
+
+	annotation PBI_ResultType = Table

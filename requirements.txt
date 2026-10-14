@@ -1,0 +1,6 @@
+pandas>=3.0        # notebooks use pandas 3 string dtype ("str")
+numpy>=1.26
+matplotlib>=3.8
+seaborn>=0.13
+pyarrow>=15.0
+jupyterlab>=4.0

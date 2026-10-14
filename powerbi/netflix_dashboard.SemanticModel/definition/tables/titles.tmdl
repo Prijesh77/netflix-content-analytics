@@ -1,0 +1,188 @@
+table titles
+	lineageTag: 545c9c99-5c8b-5b17-8a66-b3b20f25d745
+
+	column show_id
+		dataType: string
+		lineageTag: b03e263d-e2d0-5a67-a41f-4a6ccc579cd1
+		summarizeBy: none
+		sourceColumn: show_id
+
+	column type
+		dataType: string
+		lineageTag: 0983f537-82d4-5759-b4a4-e21469ccf841
+		summarizeBy: none
+		sourceColumn: type
+
+	column title
+		dataType: string
+		lineageTag: 5e7ac183-438f-5e2f-972f-5a9350dd6475
+		summarizeBy: none
+		sourceColumn: title
+
+	column director
+		dataType: string
+		lineageTag: 53859b8a-5294-53d6-a3d1-24e1a1652acc
+		summarizeBy: none
+		sourceColumn: director
+
+	column country
+		dataType: string
+		lineageTag: 4f1a60af-d5a8-5eee-8315-be79f52e10ca
+		summarizeBy: none
+		sourceColumn: country
+
+	column primary_country
+		dataType: string
+		lineageTag: 4aafe186-4152-5411-b01b-8ed537fe3d31
+		summarizeBy: none
+		sourceColumn: primary_country
+
+	column country_count
+		dataType: int64
+		lineageTag: 20f6c101-fabb-5fb1-9a39-23d1cf12f0d0
+		summarizeBy: none
+		sourceColumn: country_count
+
+	column date_added
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 2b0e6199-17ec-5861-b8d5-30cf6de87fb3
+		summarizeBy: none
+		sourceColumn: date_added
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column added_year
+		dataType: int64
+		lineageTag: 9dab1142-fee2-569f-8287-941ef2789cdc
+		summarizeBy: none
+		sourceColumn: added_year
+
+	column added_month
+		dataType: int64
+		lineageTag: b0cdcf72-6393-5a4c-bf11-ae3c1dadfda9
+		summarizeBy: none
+		sourceColumn: added_month
+
+	column added_month_name
+		dataType: string
+		lineageTag: 6d98b102-9ad2-5601-a256-e1014ed10b6e
+		summarizeBy: none
+		sourceColumn: added_month_name
+
+	column release_year
+		dataType: int64
+		lineageTag: 3917d04d-34a3-5f85-9d6f-7c74f30e4886
+		summarizeBy: none
+		sourceColumn: release_year
+
+	column content_age_at_add
+		dataType: int64
+		lineageTag: ccef7f7e-aa2a-5dde-aba5-23ff0336c59a
+		summarizeBy: none
+		sourceColumn: content_age_at_add
+
+	column rating
+		dataType: string
+		lineageTag: d4df2ec2-3869-5fb0-9f3d-0f14bc217d6d
+		summarizeBy: none
+		sourceColumn: rating
+
+	column audience_group
+		dataType: string
+		lineageTag: 70ce8fd3-5cb7-51a8-8275-aca9f5d388f8
+		summarizeBy: none
+		sourceColumn: audience_group
+
+	column duration
+		dataType: string
+		lineageTag: dcf53d0c-fd40-5c1a-94d4-7bae31d117f0
+		summarizeBy: none
+		sourceColumn: duration
+
+	column duration_value
+		dataType: int64
+		lineageTag: ec2a4857-d9e8-57e4-9b36-bf78f81989f5
+		summarizeBy: none
+		sourceColumn: duration_value
+
+	column duration_unit
+		dataType: string
+		lineageTag: 2a2094ee-ea8f-5be0-ba1e-a3bccf7b1efe
+		summarizeBy: none
+		sourceColumn: duration_unit
+
+	column listed_in
+		dataType: string
+		lineageTag: 640b91e9-68fe-5101-a542-9718cdf9076e
+		summarizeBy: none
+		sourceColumn: listed_in
+
+	column genre_count
+		dataType: int64
+		lineageTag: 2ca9e519-d0c6-5c4f-9b92-060bbae3b51d
+		summarizeBy: none
+		sourceColumn: genre_count
+
+	column 'Runtime Band Order' =
+			IF (
+			    titles[type] = "Movie",
+			    SWITCH (
+			        TRUE (),
+			        titles[duration_value] < 60, 1,
+			        titles[duration_value] <= 90, 2,
+			        titles[duration_value] <= 120, 3,
+			        titles[duration_value] <= 150, 4,
+			        5
+			    )
+			)
+		dataType: int64
+		lineageTag: 8a85e265-30c1-5428-9913-c84073b303cb
+		summarizeBy: none
+		isHidden
+
+	column 'Runtime Band' =
+			IF (
+			    titles[type] = "Movie",
+			    SWITCH (
+			        TRUE (),
+			        titles[duration_value] < 60, "<60",
+			        titles[duration_value] <= 90, "60-90",
+			        titles[duration_value] <= 120, "91-120",
+			        titles[duration_value] <= 150, "121-150",
+			        "150+"
+			    )
+			)
+		dataType: string
+		lineageTag: e9c34dd4-be3d-54dd-9649-05f3db219175
+		summarizeBy: none
+		sortByColumn: 'Runtime Band Order'
+
+	column 'Season Bucket' =
+			IF (
+			    titles[type] = "TV Show",
+			    IF ( titles[duration_value] >= 6, "6+", FORMAT ( titles[duration_value], "0" ) )
+			)
+		dataType: string
+		lineageTag: a17e4716-e563-500c-8dbf-b7a8d0be81ee
+		summarizeBy: none
+
+	column 'Release Decade' =
+			FLOOR ( titles[release_year], 10 ) & "s"
+		dataType: string
+		lineageTag: 5ec8126a-cfc3-5b96-8e7b-631f4b3ccfae
+		summarizeBy: none
+
+	partition titles = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "netflix_titles_clean.csv"), [Delimiter = ",", Columns = 22, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    PromotedHeaders = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    RemovedUnusedColumns = Table.RemoveColumns(PromotedHeaders, {"cast", "description"}),
+				    BlanksToNull = Table.ReplaceValue(RemovedUnusedColumns, "", null, Replacer.ReplaceValue, {"date_added", "added_year", "added_month", "added_month_name", "content_age_at_add"}),
+				    ChangedTypes = Table.TransformColumnTypes(BlanksToNull, {{"show_id", type text}, {"type", type text}, {"title", type text}, {"director", type text}, {"country", type text}, {"primary_country", type text}, {"country_count", Int64.Type}, {"date_added", type date}, {"added_year", Int64.Type}, {"added_month", Int64.Type}, {"added_month_name", type text}, {"release_year", Int64.Type}, {"content_age_at_add", Int64.Type}, {"rating", type text}, {"audience_group", type text}, {"duration", type text}, {"duration_value", Int64.Type}, {"duration_unit", type text}, {"listed_in", type text}, {"genre_count", Int64.Type}}, "en-US")
+				in
+				    ChangedTypes
+
+	annotation PBI_ResultType = Table

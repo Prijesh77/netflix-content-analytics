@@ -1,0 +1,229 @@
+table _Measures
+	lineageTag: 010157aa-b169-5379-8db7-419b9d2c7244
+
+	measure 'Total Titles' = COUNTROWS ( titles )
+		formatString: #,0
+		displayFolder: 1. KPIs
+		lineageTag: 1e9b4e53-014e-57be-9448-1dfa2727a24c
+
+	measure 'Total Movies' = CALCULATE ( [Total Titles], KEEPFILTERS ( titles[type] = "Movie" ) )
+		formatString: #,0
+		displayFolder: 1. KPIs
+		lineageTag: 5565220d-1900-5ab2-9bd8-37ec34d6e3ab
+
+	measure 'Total TV Shows' = CALCULATE ( [Total Titles], KEEPFILTERS ( titles[type] = "TV Show" ) )
+		formatString: #,0
+		displayFolder: 1. KPIs
+		lineageTag: 572f81da-d818-5e60-bc49-e73963b65e64
+
+	measure 'Distinct Release Years' = DISTINCTCOUNT ( titles[release_year] )
+		formatString: #,0
+		displayFolder: 1. KPIs
+		lineageTag: 9a0ad625-40ef-5248-ab70-2243f17cda0c
+
+	measure 'Movie Share %' = DIVIDE ( [Total Movies], [Total Titles] )
+		formatString: 0.0%
+		displayFolder: 1. KPIs
+		lineageTag: 7f0d4aaf-4342-5092-9373-76a859ab4d5b
+
+	measure 'TV Share %' = DIVIDE ( [Total TV Shows], [Total Titles] )
+		formatString: 0.0%
+		displayFolder: 1. KPIs
+		lineageTag: 7fa4b8e7-2bdc-5afb-89fa-eeedfd014120
+
+	measure 'Titles Added' = CALCULATE ( [Total Titles], NOT ISBLANK ( titles[date_added] ) )
+		formatString: #,0
+		displayFolder: 2. Time
+		lineageTag: c8d7a9a4-6d5b-50d6-bc54-448717ed78cc
+
+	measure 'Titles Added PY' = CALCULATE ( [Titles Added], SAMEPERIODLASTYEAR ( 'Dim Date'[Date] ) )
+		formatString: #,0
+		displayFolder: 2. Time
+		lineageTag: 84a527aa-5f22-526e-8c50-d50994335fe3
+
+	measure 'Titles Added YoY %' = DIVIDE ( [Titles Added] - [Titles Added PY], [Titles Added PY] )
+		formatString: 0.0%
+		displayFolder: 2. Time
+		lineageTag: 18be45f7-7bc7-5302-98fe-2c125df20235
+
+	measure 'Titles Added YTD' = TOTALYTD ( [Titles Added], 'Dim Date'[Date] )
+		formatString: #,0
+		displayFolder: 2. Time
+		lineageTag: 7d8a7b3b-14f8-5c36-91b9-f04246cd6911
+
+	measure 'Titles Added Jan-Sep' =
+			VAR LastMonth2021 =
+			    CALCULATE (
+			        MAX ( titles[added_month] ),
+			        titles[added_year] = 2021,
+			        REMOVEFILTERS ( 'Dim Date' )
+			    )
+			RETURN
+			    CALCULATE ( [Titles Added], 'Dim Date'[Month Num] <= LastMonth2021 )
+		formatString: #,0
+		displayFolder: 2. Time
+		lineageTag: e988e4a7-19fb-567a-9c16-fee5669dfeff
+
+	measure 'Avg Movie Duration (min)' = CALCULATE ( AVERAGE ( titles[duration_value] ), KEEPFILTERS ( titles[type] = "Movie" ) )
+		formatString: 0.0
+		displayFolder: 3. Duration
+		lineageTag: 8d72bfff-c75e-517a-a21b-64b1140efb83
+
+	measure 'Median Movie Duration (min)' = CALCULATE ( MEDIAN ( titles[duration_value] ), KEEPFILTERS ( titles[type] = "Movie" ) )
+		formatString: 0.0
+		displayFolder: 3. Duration
+		lineageTag: 5a890429-be9d-59c2-85d7-2406f28b97f3
+
+	measure 'Avg Seasons per Show' = CALCULATE ( AVERAGE ( titles[duration_value] ), KEEPFILTERS ( titles[type] = "TV Show" ) )
+		formatString: 0.00
+		displayFolder: 3. Duration
+		lineageTag: e54d514c-e182-570c-ac63-70f01d3dd86a
+
+	measure 'Single-Season Share %' =
+			DIVIDE (
+			    CALCULATE ( [Total Titles], KEEPFILTERS ( titles[type] = "TV Show" ), titles[duration_value] = 1 ),
+			    [Total TV Shows]
+			)
+		formatString: 0.0%
+		displayFolder: 3. Duration
+		lineageTag: 2244a142-6b41-5dd4-acd7-4828b37737b9
+
+	measure '% of Catalog' = DIVIDE ( [Total Titles], CALCULATE ( [Total Titles], REMOVEFILTERS () ) )
+		formatString: 0.0%
+		displayFolder: 4. Context
+		lineageTag: ffce5a66-8448-5d30-93e8-eea556b22324
+
+	measure 'Unknown Country %' = DIVIDE ( CALCULATE ( [Total Titles], titles[country] = "Unknown" ), [Total Titles] )
+		formatString: 0.0%
+		displayFolder: 4. Context
+		lineageTag: 625d2e89-b6a3-559c-873e-f93b945ad5ae
+
+	measure '% of Country Titles' =
+			DIVIDE (
+			    [Total Titles],
+			    CALCULATE ( [Total Titles], REMOVEFILTERS ( 'Dim Genre' ), REMOVEFILTERS ( title_genres ) )
+			)
+		formatString: 0%
+		displayFolder: 4. Context
+		lineageTag: 6228c12c-84a1-5ab0-a847-4da90caaec18
+
+	measure 'Data Note' =
+			"Catalog snapshot to "
+			    & FORMAT ( MAX ( titles[date_added] ), "d mmm yyyy" )
+			    & "  ·  2021 is a partial year  ·  Counts are titles, not viewing hours"
+		displayFolder: 4. Context
+		lineageTag: 439a4dcc-8bb2-5e2f-88b9-5f20ca805f2f
+
+	measure 'Runtime Chart Title' =
+			IF (
+			    ISBLANK ( [Median Movie Duration (min)] ),
+			    "Movie runtimes (no movies selected)",
+			    "Movie runtimes · median " & FORMAT ( [Median Movie Duration (min)], "0" ) & " min"
+			)
+		displayFolder: 5. Visual helpers
+		lineageTag: 9934927b-b48f-51b9-8d24-b7bb7a761b32
+
+	measure 'Seasons Chart Title' =
+			IF (
+			    ISBLANK ( [Total TV Shows] ),
+			    "TV seasons (no TV shows selected)",
+			    "TV seasons · " & FORMAT ( [Single-Season Share %], "0%" ) & " have only one"
+			)
+		displayFolder: 5. Visual helpers
+		lineageTag: dbefa938-b2d0-52f5-aaab-f72b58e78c83
+
+	measure 'Jan-Sep Bar Colour' = IF ( SELECTEDVALUE ( 'Dim Date'[Year] ) = 2021, "#E50914", "#5A5A5A" )
+		displayFolder: 5. Visual helpers
+		lineageTag: 1d407688-5f2f-501d-b2b2-a8e711dc842a
+
+	measure 'Country Rank' =
+			VAR CurrentCountry = SELECTEDVALUE ( 'Dim Country'[country] )
+			RETURN
+			    IF (
+			        NOT ISBLANK ( CurrentCountry ) && CurrentCountry <> "Unknown",
+			        RANKX (
+			            FILTER ( ALLSELECTED ( 'Dim Country'[country] ), 'Dim Country'[country] <> "Unknown" ),
+			            CALCULATE ( [Total Titles], ALLSELECTED ( titles[type] ), ALLSELECTED ( 'Dim Genre' ) ),
+			            ,
+			            DESC,
+			            DENSE
+			        )
+			    )
+		formatString: 0
+		displayFolder: 5. Visual helpers
+		lineageTag: 11a25740-0dfc-590c-84a4-fb8d7b4c5725
+
+	measure 'Genre Rank' =
+			VAR CurrentGenre = SELECTEDVALUE ( 'Dim Genre'[genre_group] )
+			RETURN
+			    IF (
+			        NOT ISBLANK ( CurrentGenre ) && NOT CONTAINSSTRING ( CurrentGenre, "(label)" ),
+			        RANKX (
+			            FILTER ( ALLSELECTED ( 'Dim Genre'[genre_group] ), NOT CONTAINSSTRING ( 'Dim Genre'[genre_group], "(label)" ) ),
+			            CALCULATE ( [Total Titles], ALLSELECTED ( titles[type] ), ALLSELECTED ( 'Dim Country' ) ),
+			            ,
+			            DESC,
+			            DENSE
+			        )
+			    )
+		formatString: 0
+		displayFolder: 5. Visual helpers
+		lineageTag: 7e0a9ce8-7542-500c-a5a4-6820bae67f83
+
+	measure 'Titles (Top 10 Countries)' =
+			VAR CountryRank = [Country Rank]
+			RETURN
+			    IF ( NOT ISBLANK ( CountryRank ) && CountryRank <= 10, [Total Titles] )
+		formatString: #,0
+		displayFolder: 5. Visual helpers
+		lineageTag: 9301ba9d-3d9c-5868-be9b-3fb2bb3f2300
+
+	measure 'Titles (Top 12 Genres)' =
+			VAR GenreRank = [Genre Rank]
+			RETURN
+			    IF ( NOT ISBLANK ( GenreRank ) && GenreRank <= 12, [Total Titles] )
+		formatString: #,0
+		displayFolder: 5. Visual helpers
+		lineageTag: 18ac33cd-c196-5689-b0d8-84aefea615fd
+
+	measure 'Titles (Top 10 Ratings)' =
+			VAR RatingRank =
+			    IF (
+			        HASONEVALUE ( titles[rating] ),
+			        RANKX ( ALLSELECTED ( titles[rating] ), [Total Titles], , DESC, DENSE )
+			    )
+			RETURN
+			    IF ( NOT ISBLANK ( RatingRank ) && RatingRank <= 10, [Total Titles] )
+		formatString: #,0
+		displayFolder: 5. Visual helpers
+		lineageTag: 26045dda-e299-5e49-95cc-52c752ede557
+
+	measure 'Genre Mix (Top Countries x Genres)' =
+			VAR CountryRank = [Country Rank]
+			VAR GenreRank = [Genre Rank]
+			RETURN
+			    IF (
+			        NOT ISBLANK ( CountryRank ) && CountryRank <= 10
+			            && NOT ISBLANK ( GenreRank ) && GenreRank <= 8,
+			        [% of Country Titles]
+			    )
+		formatString: 0%
+		displayFolder: 5. Visual helpers
+		lineageTag: 9d8058d4-5e34-5b52-94db-5a8bb075eb69
+
+	column Placeholder
+		dataType: string
+		lineageTag: 8a567e4c-dd48-5661-b812-31d1dabdb801
+		summarizeBy: none
+		sourceColumn: Placeholder
+		isHidden
+
+	partition _Measures = m
+		mode: import
+		source =
+				let
+				    Source = #table(type table [Placeholder = text], {})
+				in
+				    Source
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,33 @@
+# --- Data: not redistributed (download from Kaggle, regenerate with notebook 02) ---
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# --- Python / Jupyter ---
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+
+# --- Secrets & local config (never commit) ---
+.env
+*.env
+*.pem
+pgpass.conf
+.pgpass
+
+# --- Power BI temp / local-only files ---
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+*.pbix.bak
+~$*
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
